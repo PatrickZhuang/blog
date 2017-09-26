@@ -7,7 +7,8 @@ from taggit.managers import TaggableManager
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
-        return super(PublishedManager, self).get_queryset().filter(status='published')
+        return super(PublishedManager, self).get_queryset()\
+            .filter(status='published')
 
 
 # Create your models here.
@@ -27,7 +28,8 @@ class Post(models.Model):
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICE, default='draft')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICE,
+                              default='draft')
 
     class Meta:
         ordering = ('-publish',)
